@@ -31,7 +31,7 @@ button{font-family:inherit}
 
 /* 바탕화면 */
 .desk-globe{position:fixed;right:-28vmin;bottom:-34vmin;width:118vmin;height:118vmin;color:#e9dcc3;opacity:.08;pointer-events:none;
-  transition:transform 1.4s cubic-bezier(.45,.1,.2,1),color 1.4s}
+  transition:transform 1.4s cubic-bezier(.33,1,.68,1),color 1.4s}
 .dawn{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity 1.4s;
   background:linear-gradient(to top,rgba(222,150,96,.30) 0%,rgba(170,118,128,.15) 30%,rgba(70,90,130,.08) 55%,transparent 78%)}
 body{transition:background-color 1.4s}
@@ -742,21 +742,19 @@ stage.addEventListener('wheel', e => {
 
 // 배경: 넘길수록 지구본이 돌고, 밤에서 새벽으로
 const globe = document.querySelector('.desk-globe'), mers = [...document.querySelectorAll('#mer ellipse')], dawn = document.getElementById('dawn');
-const spots = [[0,0],[-92,-8],[-18,-58],[-96,-62],[-48,6],[-6,-4]];
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lam = 0, lamAnim = 0;
 function drawMer(l){ mers.forEach((m,k) => m.setAttribute('rx', (96 * Math.abs(Math.sin((l + k * 30) * Math.PI / 180))).toFixed(1))); }
 function sky(i){
-  const groups = [...new Set(pages.slice(0, i + 1).map(p => p.dataset.g))];
-  const gi = i === pages.length - 1 ? spots.length - 1 : Math.min(groups.length - 1, spots.length - 2);
-  const [x,y] = spots[gi];
-  globe.style.transform = `translate(${x}vmin,${y}vmin) rotate(${i * 3 - 10}deg)`;
+  // 오른쪽 아래에서 왼쪽으로 굴러가듯 이동
   const t = i / (pages.length - 1);
+  const x = -t * 112, y = -Math.sin(Math.PI * t) * 16;
+  globe.style.transform = `translate(${x.toFixed(1)}vmin,${y.toFixed(1)}vmin) rotate(${(-12 + t * 10).toFixed(1)}deg)`;
   dawn.style.opacity = Math.pow(t, 1.6).toFixed(3);
   globe.style.color = t > .75 ? '#f0cfa4' : '#e9dcc3';
   const c = [[15,23,34],[27,30,44]].reduce((a,b) => a.map((v,k) => Math.round(v + (b[k] - v) * t)));
   document.body.style.backgroundColor = `rgb(${c})`;
-  const from = lam, to = i * 14, t0 = performance.now();
+  const from = lam, to = -t * 200, t0 = performance.now();
   cancelAnimationFrame(lamAnim);
   if (still){ lam = to; return drawMer(lam); }
   (function step(now){
