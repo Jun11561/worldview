@@ -30,7 +30,17 @@ body{margin:0;background:var(--desk);color:var(--ink);overflow:hidden;
 button{font-family:inherit}
 
 /* 바탕화면 */
-.desk-globe{position:fixed;right:-28vmin;bottom:-34vmin;width:118vmin;height:118vmin;color:#e9dcc3;opacity:.07;pointer-events:none}
+.desk-globe{position:fixed;right:-28vmin;bottom:-34vmin;width:118vmin;height:118vmin;color:#e9dcc3;opacity:.08;pointer-events:none;
+  transition:transform 1.4s cubic-bezier(.45,.1,.2,1),color 1.4s}
+.dawn{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity 1.4s;
+  background:linear-gradient(to top,rgba(222,150,96,.30) 0%,rgba(170,118,128,.15) 30%,rgba(70,90,130,.08) 55%,transparent 78%)}
+body{transition:background-color 1.4s}
+.flow > :first-child{margin-top:0}
+@media(min-width:1000px){
+  .flow{column-count:2;column-gap:44px}
+  .flow p{orphans:2;widows:2}
+  .flow blockquote,.flow .fig-r{break-inside:avoid}
+}
 .desk-glow{position:fixed;inset:0;pointer-events:none;
   background:radial-gradient(ellipse at 18% 0%,rgba(217,160,102,.10),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(127,180,230,.08),transparent 50%)}
 
@@ -224,6 +234,15 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
   .cols .proc .state{display:none}
   .cols .widget{margin-bottom:0}
   .q{min-height:0}
+  .result{padding:14px 20px}
+  .result.show{grid-template-columns:160px 1fr;gap:20px}
+  .result .sketch{width:160px;height:auto}
+  .result p{margin-bottom:6px;line-height:1.7}
+  .result .ren{margin-bottom:6px}
+  .result .nbr{margin-top:8px;padding:9px 12px;line-height:1.65}
+  .result .openq{margin-top:8px}
+  .all summary{padding:2px 0}
+  .widget{margin-bottom:12px}
   .boot .win-body{padding:20px 44px}
   .cover h1{font-size:32px;margin-bottom:10px}
   .bootout{margin-bottom:12px}
@@ -270,10 +289,11 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
 <body>
 
 <svg class="desk-globe" viewBox="-100 -100 200 200" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width=".35">
-  <circle r="96"/><ellipse rx="72" ry="96"/><ellipse rx="42" ry="96"/><ellipse rx="12" ry="96"/>
+  <circle r="96"/><g id="mer"><ellipse ry="96"/><ellipse ry="96"/><ellipse ry="96"/><ellipse ry="96"/><ellipse ry="96"/><ellipse ry="96"/></g>
   <ellipse rx="96" ry="18"/><ellipse cy="-48" rx="83" ry="14"/><ellipse cy="48" rx="83" ry="14"/><ellipse cy="-80" rx="53" ry="8"/><ellipse cy="80" rx="53" ry="8"/>
 </g></svg>
 <div class="desk-glow"></div>
+<div class="dawn" id="dawn"></div>
 
 <header class="menu"><div class="inner">
   <div class="brand">
@@ -334,8 +354,10 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
     <div class="win-body">
       <div class="kick">1. 세계관을 분별하라</div>
       <h2>세계관은 다양하다</h2>
+      <div class="flow">
       <p>세계관은 종교와 신화 속에서 먼저 싹텄습니다. 기독교, 이슬람교, 힌두교, 불교, 유교, 도교, 샤머니즘이 각자 독특한 세계관을 가지고 있습니다. 18세기 이후 서양 사회에서는 계몽주의, 보수주의, 자유주의, 사회주의, 민족주의, 전체주의 같은 근대 이념이 큰 힘을 가졌고, 요즘은 판타지 문학, 영화, 드라마, 게임을 하나로 엮은 가상 세계관까지 등장했습니다. 또 개인주의, 소비주의, 상대주의, 과학주의, 뉴에이지, 포스트모더니즘처럼 우리가 알아채지 못하는 사이에 받아들인 '은밀한 세계관'도 있습니다.</p>
       <p>교재는 마블 시네마틱 유니버스(MCU)를 예로 듭니다. MCU는 여러 우주가 동시에 존재하는 멀티버스이고, 각 우주의 사건은 그 우주의 세계관 안에서 일어납니다. 타노스가 우주 생명체의 절반을 없앤 것도 그 나름의 정당성이 있다는 신념에서 나온 행동입니다.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -346,6 +368,7 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
     <div class="win-body">
       <div class="kick">1. 세계관을 분별하라</div>
       <h2>종교와 이념 속에 뿌리내린 근본 신념</h2>
+      <div class="flow">
       <div class="fig-r">
         <svg viewBox="0 0 160 190" aria-hidden="true">
           <rect x="75" y="18" width="10" height="160" rx="2" fill="#7a654c"/>
@@ -359,6 +382,7 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
       <p>세계관은 사람의 생각과 행동을 결정하는 근본적인 신념(basic belief)입니다. 그래서 새로운 제도나 기술을 받아들여도 쉽게 사라지지 않습니다. 인도 사람이 첨단 IT 산업에서 일해도 여전히 힌두교 세계관을 가지고 살고, 한국 사람이 근대화된 사회에 살아도 샤머니즘이나 유교적 권위주의를 품고 있는 것이 그 예입니다. 무신론적 휴머니즘 같은 근대 이념도 순수한 이성의 결론이라기보다 '어떤 사회가 바람직한가'에 대한 근본 믿음에서 나왔다고 볼 수 있습니다.</p>
       <p>'세계관'은 독일어 'Weltanschauung'에서 왔고 영어로는 'world view'로 옮겨졌습니다. 원래 독일어는 눈으로 보는 시각보다 직관적이고 체험적인 의미가 강합니다. 딜타이는 모든 세계관의 뿌리가 '삶'이라고 했습니다. 본능과 감정이 환경과 만나 반복되며 보편적인 정서가 되고, 그것이 발전해 세계의 의미에 답하는 이상과 규범, 곧 종교나 이념이 됩니다. 나라마다 세계관이 다른 것도 기후, 인종, 국가 형태, 시대 배경이 다르기 때문입니다.</p>
       <p>결국 세계관은 우리를 이끄는 <b>인생의 안내판</b>입니다. 문제는 그 안내판이 얼마나 잘 작동하느냐입니다.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -369,9 +393,11 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
     <div class="win-body">
       <div class="kick">1. 세계관을 분별하라</div>
       <h2>어떤 안내판을 따를 것인가</h2>
+      <div class="flow">
       <blockquote class="verse">주의 말씀은 내 발에 등이요 내 길에 빛이니이다<cite>시편 119:105</cite></blockquote>
       <p>6주차 수업에서 교수님은 현대 과학철학에서도 전제 없는 학문은 없고, 완전히 중립적인 이성도 없다고 하셨습니다. 1장을 읽으며 그 말이 다시 떠올랐습니다. 누구나 이미 어떤 OS를 깔고 세상을 봅니다. 그렇다면 중요한 것은 '중립이 되는 것'이 아니라 '어떤 안내판을 따를 것인가'입니다.</p>
       <p>기독교인에게 그 안내판은 말씀입니다. MCU처럼 같은 사건도 어느 세계관에서 보느냐에 따라 의미가 달라진다면, 저는 이 세상을 하나님이 창조하시고 지금도 다스리시는 세계로 보는 시선을 기본 설정으로 삼고 싶습니다. 동시에 은밀한 세계관 목록을 보며, 제 OS 위에서도 개인주의나 소비주의 같은 프로그램이 몰래 돌아가고 있을 수 있다는 점을 인정하게 됩니다.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -383,8 +409,10 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
     <div class="win-body">
       <div class="kick">2. 세계관은 어떤 갈등을 일으키는가?</div>
       <h2>2-1. 한 세계관 안에서도 갈등이 있다</h2>
+      <div class="flow">
       <p>우리는 어떤 세계관의 영향 아래 살지만, 그 세계관대로 일관되게 살지는 못합니다. 교재는 기독교인을 예로 듭니다. 하나님이 세상을 다스리고 언젠가 심판하신다고 믿어야 하지만, 악한 사람이 잘사는 모습을 보며 창조는 믿되 지금 다스리신다는 것은 믿지 못하는 신자도 있습니다. 이웃을 사랑하라고 배워도 손해를 볼 때는 내 이익을 먼저 챙깁니다. 조선의 유학자들도 군자를 자처했지만 당파 싸움과 세도 정치로 유교 정치를 무너뜨렸고, 한국의 민족주의도 외국인 200만 명 시대와 다문화 사회 앞에서 갈등을 겪고 있습니다.</p>
       <p>교재는 그 이유를 두 가지로 봅니다. 첫째, 우리 안의 본능적인 욕망이 세계관과 부딪히기 때문입니다. 둘째, 우리를 둘러싼 환경이 세계관과 충돌하기 때문입니다. 세계관은 이상적인 모델을 보여 주지만, 통제할 수 없는 욕망과 환경이 그 세계관을 비틀거나 힘없게 만듭니다.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -395,10 +423,12 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
     <div class="win-body">
       <div class="kick">2-1. 한 세계관 안의 갈등</div>
       <h2>베드로의 부인과 회복</h2>
+      <div class="flow">
       <p>이 갈등을 가장 잘 보여 주는 인물은 베드로입니다.</p>
       <blockquote class="verse">베드로가 대답하여 이르되 모두 주를 버릴지라도 나는 결코 버리지 않겠나이다<cite>마태복음 26:33</cite></blockquote>
       <p>그렇게 말했던 베드로는 그날 밤 불가에서 예수님을 세 번이나 모른다고 했습니다(마태복음 26장). 예수님을 따르는 세계관을 가지고 있었지만, 두려움이라는 욕망과 사람들의 시선이라는 환경 앞에서 그 세계관대로 움직이지 못한 것입니다. 교재가 말한 두 가지 원인이 그대로 드러납니다.</p>
       <p>그런데 이야기는 거기서 끝나지 않습니다. 부활하신 예수님은 바닷가에서 베드로에게 "네가 나를 사랑하느냐"고 세 번 물으시며 그를 다시 세우셨습니다(요한복음 21장). 기독교 세계관에서 갈등의 해결은 내가 더 열심히 버티는 것이 아니라, 하나님이 먼저 찾아와 회복시키시는 데서 시작됩니다.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -430,7 +460,7 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
 
 <section class="page" data-t="2-2. 충돌 1·2" data-g="2. 갈등">
   <div class="win sum">
-    <div class="bar"><span class="ico"></span>교재 요약<span class="r">21–24쪽</span></div>
+    <div class="bar"><span class="ico"></span>교재 요약<span class="r">21–22쪽</span></div>
     <div class="win-body">
       <div class="kick">2. 세계관은 어떤 갈등을 일으키는가?</div>
       <h2>2-2. 서로 다른 세계관이 만날 때</h2>
@@ -447,7 +477,7 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
 
 <section class="page" data-t="2-2. 충돌 3·4" data-g="2. 갈등">
   <div class="win sum">
-    <div class="bar"><span class="ico"></span>교재 요약<span class="r">21–24쪽</span></div>
+    <div class="bar"><span class="ico"></span>교재 요약<span class="r">22–24쪽</span></div>
     <div class="win-body">
       <div class="kick">2. 세계관은 어떤 갈등을 일으키는가?</div>
       <h2>2-2. 서로 다른 세계관이 만날 때 (계속)</h2>
@@ -468,9 +498,11 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
     <div class="win-body">
       <div class="kick">2-2. 서로 다른 세계관의 충돌</div>
       <h2>이기는 것이 아니라 대답할 준비</h2>
+      <div class="flow">
       <blockquote class="verse">너희 마음에 그리스도를 주로 삼아 거룩하게 하고 너희 속에 있는 소망에 관한 이유를 묻는 자에게는 대답할 것을 항상 준비하되 온유와 두려움으로 하고<cite>베드로전서 3:15</cite></blockquote>
       <p>기독교인도 이 네 가지 갈등 한가운데 있습니다. 그런데 기독교 세계관이 요구하는 것은 상대를 이기는 것이 아니라, 내가 믿는 이유를 설명할 준비를 하되 온유하게 하는 것입니다. 부록에서도 다른 사람의 세계관을 아는 것은 이웃을 더 잘 이해하고 섬기는 데 도움이 된다고 말합니다(252쪽).</p>
       <p>두 번째 충돌(종교와 과학)에 대해서는 6주차 수업이 생각납니다. 교수님은 천동설과 지동설의 충돌을 종교와 과학의 싸움이 아니라 '오염된 기독교 세계관'과 '회복된 기독교 세계관'의 충돌로 보셨습니다. 갈릴레오와 뉴턴은 하나님을 우주의 법칙을 만드신 설계자로 믿었습니다. 그렇다면 과학과 신앙은 처음부터 서로 다른 OS가 아니라, 같은 OS 안에서 함께 돌아갈 수 있는 프로그램입니다.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -510,13 +542,6 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
         <div class="w-head"><span>기독교 세계관 테스트 · 교재의 다섯 가지 기준</span><button class="btn g" id="runBtn">테스트 실행</button></div>
         <div class="out" id="testOut">
           <div class="hint" id="testHint">테스트 실행을 누르면 결과가 나옵니다.</div>
-          <div class="t">
-            <div class="line"><span>[예시] 유교 세계관</span><span class="res warn">통과 3 / 미통과 2</span></div>
-            <div class="detail">
-              <p><span class="pass">통과</span> 윤리적 기준(인의) · 학문과 선비 정신 · 충효와 지조<br><span class="fail">미통과</span> 차별 없는 인권 · 공정성</p>
-              <p class="note">교재가 든 유교의 장단점을 테스트 형식으로 옮긴 것입니다. 모든 면에서 완벽한 세계관은 없습니다.</p>
-            </div>
-          </div>
           <div class="t">
             <div class="line"><span>기준 1 정서적 필요와 인격적 체험</span><span class="res pass">통과</span></div>
             <div class="detail">
@@ -559,6 +584,13 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
               <p>교재가 든 사이비 집단의 예처럼, '기독교'라는 이름을 달고 있어도 말씀에서 벗어나면 이 테스트를 통과하지 못합니다. 6주차에 배운 '오염된 기독교 세계관'도 같은 경우입니다. 테스트가 통과한 것은 기독교 세계관 자체이지, 그것을 사는 제가 이미 완벽하다는 뜻은 아닙니다. 그래서 2-1의 업데이트가 계속 필요합니다.</p>
             </div>
           </div>
+          <div class="t">
+            <div class="line"><span>[참고] 교재 예시: 유교 세계관</span><span class="res warn">통과 3 / 미통과 2</span></div>
+            <div class="detail">
+              <p><span class="pass">통과</span> 윤리적 기준(인의) · 학문과 선비 정신 · 충효와 지조<br><span class="fail">미통과</span> 차별 없는 인권 · 공정성</p>
+              <p class="note">교재가 든 유교의 장단점을 테스트 형식으로 옮긴 것입니다. 모든 면에서 완벽한 세계관은 없습니다.</p>
+            </div>
+          </div>
           <div class="sumline" id="testSum"><span class="pass">5개 기준 모두 통과</span>, <span class="warn">주의 1건</span></div>
         </div>
       </div>
@@ -567,14 +599,16 @@ blockquote.verse cite{display:block;margin-top:6px;font:12.5px var(--mono);font-
 </section>
 
 <!-- 4 -->
-<section class="page" data-t="세계관 진단기" data-g="4. 진단">
+<section class="page" data-t="세계관 진단기" data-g="부록. 진단">
   <div class="win sum">
     <div class="bar"><span class="ico"></span>교재 요약 + 진단기<span class="r">부록 252–261쪽</span></div>
     <div class="win-body">
-      <div class="kick">4. 당신의 세계관은 무엇입니까?</div>
+      <div class="kick">부록. 당신의 세계관은 무엇입니까?</div>
       <h2>세계관의 다양한 유형들</h2>
+      <div class="flow">
       <p>오늘날 세상에는 수많은 세계관이 있지만, 일정한 유형으로 나누면 그 수가 많지 않습니다. 자기 세계관이 무엇이고 다른 세계관과 어떻게 다른지, 왜 그것이 더 이치에 맞는지 알아야 합니다. 다른 사람의 세계관을 아는 것도 중요합니다. 부록에는 FEVA의 블레어 목사가 만든 순서도가 실려 있는데, 질문을 따라가면 14가지 세계관 가운데 하나에 도착합니다. 각 세계관은 하나님, 세상, 사람의 관계로 그려집니다.</p>
       <p class="note">아래 진단기는 부록 순서도의 질문을 그대로 옮긴 것입니다. 결과 그림은 하나님·세상·사람의 관계를 따로 그렸습니다.</p>
+      </div>
       <div class="widget">
         <div class="w-head"><span>세계관 진단기</span><span><button class="btn" id="backBtn">‹ 뒤로</button> <button class="btn" id="resetBtn">처음부터</button></span></div>
         <div class="qbox">
@@ -678,6 +712,7 @@ function show(i){
   [...dots.children].forEach((d,k) => d.classList.toggle('on', k === i));
   [...toc.querySelectorAll('button')].forEach((b,k) => b.classList.toggle('on', k === i));
   history.replaceState(null, '', '#' + (i + 1));
+  sky(i);
 }
 prevBtn.onclick = () => show(cur - 1);
 nextBtn.onclick = () => show(cur + 1);
@@ -698,6 +733,39 @@ stage.addEventListener('touchend', e => {
   if (e.target.closest('.proc')) return;
   show(cur + (dx < 0 ? 1 : -1));
 }, {passive:true});
+
+// 창 밖에서 휠을 굴려도 창 안이 스크롤되게
+stage.addEventListener('wheel', e => {
+  if (e.target.closest('.win-body')) return;
+  pages[cur].querySelector('.win-body').scrollBy(0, e.deltaY);
+}, {passive:true});
+
+// 배경: 넘길수록 지구본이 돌고, 밤에서 새벽으로
+const globe = document.querySelector('.desk-globe'), mers = [...document.querySelectorAll('#mer ellipse')], dawn = document.getElementById('dawn');
+const spots = [[0,0],[-92,-8],[-18,-58],[-96,-62],[-48,6],[-6,-4]];
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lam = 0, lamAnim = 0;
+function drawMer(l){ mers.forEach((m,k) => m.setAttribute('rx', (96 * Math.abs(Math.sin((l + k * 30) * Math.PI / 180))).toFixed(1))); }
+function sky(i){
+  const groups = [...new Set(pages.slice(0, i + 1).map(p => p.dataset.g))];
+  const gi = i === pages.length - 1 ? spots.length - 1 : Math.min(groups.length - 1, spots.length - 2);
+  const [x,y] = spots[gi];
+  globe.style.transform = `translate(${x}vmin,${y}vmin) rotate(${i * 3 - 10}deg)`;
+  const t = i / (pages.length - 1);
+  dawn.style.opacity = Math.pow(t, 1.6).toFixed(3);
+  globe.style.color = t > .75 ? '#f0cfa4' : '#e9dcc3';
+  const c = [[15,23,34],[27,30,44]].reduce((a,b) => a.map((v,k) => Math.round(v + (b[k] - v) * t)));
+  document.body.style.backgroundColor = `rgb(${c})`;
+  const from = lam, to = i * 14, t0 = performance.now();
+  cancelAnimationFrame(lamAnim);
+  if (still){ lam = to; return drawMer(lam); }
+  (function step(now){
+    const k = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+    lam = from + (to - from) * e; drawMer(lam);
+    if (k < 1) lamAnim = requestAnimationFrame(step);
+  })(t0);
+}
+drawMer(0);
 
 const start = parseInt(location.hash.slice(1), 10);
 show(start >= 1 && start <= pages.length ? start - 1 : 0);
@@ -888,7 +956,7 @@ function sketch(id){
 let path = [], hist = [];
 const qtext = document.getElementById('qtext'), opts = document.getElementById('opts'),
       qlabel = document.getElementById('qlabel'), result = document.getElementById('result'),
-      backBtn = document.getElementById('backBtn');
+      backBtn = document.getElementById('backBtn'), qbox = document.querySelector('.qbox');
 
 function lastType(){ for (let i = path.length - 1; i >= 0; i--) if (nodes[path[i]].type) return path[i]; return null; }
 function go(id){
@@ -910,6 +978,7 @@ function ask(id){
     opts.appendChild(b);
   });
   result.classList.remove('show');
+  qbox.hidden = false;
   backBtn.disabled = !hist.length;
 }
 function finish(){
@@ -926,6 +995,8 @@ function finish(){
     result.innerHTML = `<div></div><div><p>순서도는 이 질문으로 끝납니다. 14가지 유형 중 어디에도 딱 맞지 않는 경우입니다.</p><div class="openq"><b>${end}</b></div></div>`;
   }
   result.classList.add('show');
+  qbox.hidden = true;
+  result.scrollIntoView({block:'nearest'});
   backBtn.disabled = !hist.length;
 }
 backBtn.onclick = () => { if (!hist.length) return; path = hist.pop(); ask(path[path.length - 1]); };
