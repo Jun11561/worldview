@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>worldview.os — 세계관이란 무엇인가?</title>
+<meta name="description" content="기독교 세계관 중간 대체과제 · 『기독교 창으로 본 세상』 1장 요약">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#0d0f12; --panel:#14171c; --panel2:#181c22; --line:#262b33;
+  --text:#d6d9de; --dim:#8b929d; --faint:#5a616c;
+  --green:#8fd18b; --red:#e5736b; --blue:#7fb4e6; --amber:#d9a066;
+  --mono:"D2Coding","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+.mono{font-family:var(--mono)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(13,15,18,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line)}
+nav .tabs{max-width:1120px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+nav .tabs::-webkit-scrollbar{display:none}
+nav a{font-family:var(--mono);font-size:13px;color:var(--dim);text-decoration:none;
+  padding:14px 16px;white-space:nowrap;border-bottom:2px solid transparent}
+nav a.on{color:var(--text);border-bottom-color:var(--green)}
+
+main{max-width:1120px;margin:0 auto;padding:0 20px 80px}
+section{padding-top:72px}
+.sec-head{font-family:var(--mono);color:var(--dim);font-size:13px;margin-bottom:6px}
+.sec-head b{color:var(--green);font-weight:normal}
+h2{font-size:28px;line-height:1.4;margin:0 0 28px;letter-spacing:-.5px}
+h3{font-size:19px;margin:0 0 12px;line-height:1.5}
+h3 small{font-weight:normal;color:var(--faint);font-size:13px;margin-left:6px}
+p{margin:0 0 14px}
+
+/* boot */
+#boot{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding-top:40px}
+.term{background:#090a0c;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.term-bar{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);align-items:center}
+.term-bar i{width:11px;height:11px;border-radius:50%;background:#2c3139;display:block}
+.term-bar span{margin-left:8px;font:12px var(--mono);color:var(--faint)}
+.term-body{padding:22px 22px 26px;font:15px/1.9 var(--mono);min-height:230px}
+.term-body .l{white-space:pre-wrap}
+.term-body .ok{color:var(--green)} .term-body .am{color:var(--amber)} .term-body .dm{color:var(--dim)}
+.cursor{display:inline-block;width:9px;height:1.1em;background:var(--green);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.boot-under{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font:12px var(--mono);color:var(--faint)}
+.btn{font:13px var(--mono);background:transparent;color:var(--text);border:1px solid var(--line);
+  border-radius:6px;padding:8px 14px;cursor:pointer}
+.btn:hover{border-color:var(--dim)}
+.btn.go{border-color:var(--green);color:var(--green)}
+.btn:disabled{opacity:.4;cursor:default}
+.intro{margin-top:34px;max-width:760px;opacity:0;transition:opacity .8s}
+.intro.show{opacity:1}
+.intro h1{font-size:32px;line-height:1.35;margin:0 0 16px;letter-spacing:-.6px}
+.intro .by{font:13px var(--mono);color:var(--dim);margin-top:18px}
+
+/* cards */
+.pair{display:grid;gap:18px}
+@media(min-width:1000px){
+  .pair{grid-template-columns:1.35fr 1fr;align-items:start}
+  .pair .resp{position:sticky;top:74px}
+}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px 24px 14px}
+.card .tag{display:inline-block;font:12px var(--mono);padding:2px 9px;border-radius:4px;margin-bottom:14px}
+.sum{border-left:3px solid var(--blue)}
+.sum .tag{color:var(--blue);background:rgba(127,180,230,.1)}
+.resp{border-left:3px solid var(--amber);background:var(--panel2)}
+.resp .tag{color:var(--amber);background:rgba(217,160,102,.12)}
+.sum h3{margin-top:6px}
+.sum h3 + p{margin-top:0}
+.sub{margin-top:26px}
+.criteria{margin:4px 0 16px;padding-left:22px}
+.criteria li{margin-bottom:6px}
+
+blockquote.verse{margin:0 0 18px;padding:14px 16px;border-radius:8px;background:rgba(217,160,102,.07);
+  border:1px solid rgba(217,160,102,.22);font-size:15.5px;line-height:1.8}
+blockquote.verse cite{display:block;margin-top:6px;font-style:normal;font:12.5px var(--mono);color:var(--amber)}
+.note{font-size:14px;color:var(--dim)}
+
+/* task manager */
+.widget{margin-top:18px;background:#0b0c0f;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.widget .w-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;
+  border-bottom:1px solid var(--line);font:13px var(--mono);color:var(--dim);flex-wrap:wrap}
+.proc{width:100%;border-collapse:collapse;font:13.5px var(--mono)}
+.proc th{text-align:left;color:var(--faint);font-weight:normal;padding:9px 16px;border-bottom:1px solid var(--line)}
+.proc td{padding:10px 16px;border-bottom:1px solid #1b1f25;vertical-align:middle}
+.proc tr.row{cursor:pointer}
+.proc tr.row:hover td{background:#12151a}
+.proc .name{white-space:nowrap}
+.proc .state{color:var(--dim);white-space:nowrap}
+.proc .fg .name{color:var(--amber)}
+.bar{height:8px;background:#1d2128;border-radius:4px;overflow:hidden;min-width:80px}
+.bar i{display:block;height:100%;border-radius:4px;transition:width 1.2s ease}
+.fg .bar i{background:var(--amber)} .bg .bar i{background:var(--red)}
+.pct{width:52px;text-align:right;color:var(--dim)}
+.proc tr.desc td{color:var(--dim);font-family:Pretendard,sans-serif;font-size:14px;padding:4px 16px 12px;line-height:1.7}
+.w-foot{padding:14px 16px;font:13px var(--mono);color:var(--dim);min-height:50px}
+.w-foot .ok{color:var(--green)}
+
+/* error logs */
+details.err{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;background:#101318}
+details.err summary{cursor:pointer;list-style:none;padding:12px 16px;font:13.5px var(--mono);color:var(--red)}
+details.err summary::-webkit-details-marker{display:none}
+details.err summary span{color:var(--dim);margin-left:6px}
+details.err summary:before{content:"▸ ";color:var(--faint)}
+details.err[open] summary:before{content:"▾ "}
+details.err .body{padding:0 16px 6px;font-size:15px}
+
+/* tests */
+.runner{margin-top:18px}
+.runner .out{padding:16px;font:14px/1.8 var(--mono)}
+.t{display:none;margin-bottom:14px}
+.t.show{display:block;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.t .line{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.t .res{font-weight:bold}
+.pass{color:var(--green)} .fail{color:var(--red)} .warn{color:#e8c56b}
+.t .detail{font-family:Pretendard,sans-serif;font-size:15px;color:var(--text);margin:8px 0 0 0;padding-left:14px;border-left:1px solid var(--line)}
+.t .detail blockquote.verse{margin-bottom:10px}
+.t .detail p{margin-bottom:6px}
+.t .detail .note{margin-bottom:0}
+.summary-line{display:none;margin-top:6px;padding-top:12px;border-top:1px solid var(--line)}
+.summary-line.show{display:block}
+
+/* diagnose */
+.diag{margin-top:18px}
+.diag-grid{display:grid;gap:0}
+@media(min-width:900px){.diag-grid{grid-template-columns:1fr 1fr}}
+.qpanel{padding:20px;border-bottom:1px solid var(--line)}
+@media(min-width:900px){.qpanel{border-bottom:none;border-right:1px solid var(--line)}}
+.qpanel .qlabel{font:12px var(--mono);color:var(--faint);margin-bottom:6px}
+.qpanel .q{font-size:20px;font-weight:600;line-height:1.5;margin-bottom:16px;min-height:60px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts .btn{font-size:14px;padding:9px 16px}
+.opts .btn:hover{border-color:var(--green);color:var(--green)}
+.stack{padding:20px;font:13px/1.9 var(--mono);color:var(--dim);max-height:340px;overflow:auto}
+.stack .fr{white-space:pre-wrap}
+.stack .fr .k{color:var(--text)}
+.stack .fr .ans{color:var(--green)}
+.stack .fr .ty{color:var(--amber)}
+.graph-wrap{border-top:1px solid var(--line);overflow-x:auto;padding:10px 0}
+.graph-wrap svg{display:block}
+.gnode rect{fill:#13161b;stroke:#2a3038;rx:5}
+.gnode text{fill:#6c737e;font:10.5px Pretendard,sans-serif}
+.gnode.type rect{fill:#1d1712;stroke:#4a3826}
+.gnode.type text{fill:#b48a5e}
+.gnode.end rect{fill:#0b0c0e;stroke:#3a3f47;stroke-dasharray:3 2}
+.gnode.on rect{stroke:var(--green);stroke-width:1.6}
+.gnode.on text{fill:var(--text)}
+.gnode.type.on rect{stroke:var(--amber)}
+.gnode.type.on text{fill:var(--amber)}
+.gedge{fill:none;stroke:#252a31;stroke-width:1.2}
+.gedge.back{stroke-dasharray:4 3}
+.gedge.on{stroke:var(--green);stroke-width:2}
+.result{display:none;padding:20px;border-top:1px solid var(--line)}
+.result.show{display:grid;gap:18px;animation:fade .4s}
+@media(min-width:700px){.result.show{grid-template-columns:200px 1fr;align-items:start}}
+.result .rname{font-size:22px;font-weight:700;margin-bottom:2px}
+.result .ren{font:13px var(--mono);color:var(--dim);margin-bottom:12px}
+.result .neighbor{margin-top:12px;padding:12px 14px;border-radius:8px;background:rgba(217,160,102,.07);border:1px solid rgba(217,160,102,.22)}
+.gnode text{pointer-events:none}
+.result .neighbor b{display:block;font:12px var(--mono);color:var(--amber);margin-bottom:4px;font-weight:normal}
+.result .openq{margin-top:12px;color:var(--dim);font-size:15px}
+.sketch{background:#0f1215;border:1px solid var(--line);border-radius:8px}
+.sketch text{font:11px Pretendard,sans-serif;fill:#9aa1ab}
+.all-types{margin-top:18px}
+.all-types summary{cursor:pointer;font:13px var(--mono);color:var(--dim);padding:6px 0}
+.tlist{display:grid;gap:12px;margin-top:10px}
+@media(min-width:800px){.tlist{grid-template-columns:1fr 1fr}}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;font-size:15px}
+.tcard h4{margin:0 0 6px;font-size:16px}
+.tcard h4 span{font:12px var(--mono);color:var(--dim);font-weight:normal;margin-left:6px}
+.tcard .nb{color:var(--amber);font-size:14px;margin-top:8px}
+
+/* shutdown */
+.log{font:14px/1.9 var(--mono);color:var(--dim);background:#090a0c;border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:22px;white-space:pre-wrap}
+.log .ok{color:var(--green)}
+.final{max-width:760px}
+.src{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--dim)}
+.src ul{padding-left:18px;margin:6px 0 16px}
+footer{text-align:center;font:12px var(--mono);color:var(--faint);padding:30px 0 50px}
+
+@media(max-width:600px){
+  body{font-size:15.5px}
+  h2{font-size:23px}
+  .card{padding:20px 18px 10px}
+  .intro h1{font-size:26px}
+  .term-body{font-size:13.5px;padding:18px 16px}
+  .proc td,.proc th{padding:9px 10px}
+  .proc .state{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  nav,.boot-under,.btn{display:none!important}
+  body{background:#fff;color:#111}
+  .t,.summary-line,.intro{display:block!important;opacity:1!important}
+  details{display:block}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="tabs">
+  <a href="#boot">00_boot</a>
+  <a href="#s1">01_분별.md</a>
+  <a href="#s2">02_갈등.log</a>
+  <a href="#s3">03_test.sh</a>
+  <a href="#s4">04_diagnose.js</a>
+  <a href="#s5">05_shutdown.log</a>
+</div></nav>
+
+<main>
+
+<!-- 00 -->
+<section id="boot">
+  <div class="term">
+    <div class="term-bar"><i></i><i></i><i></i><span>worldview — bash</span></div>
+    <div class="term-body" id="bootOut"></div>
+  </div>
+  <div class="boot-under"><span>『기독교 창으로 본 세상』 1장 + 부록</span><button class="btn" id="skip">skip ›</button></div>
+
+  <div class="intro" id="intro">
+    <h1>세계관이란 무엇인가?</h1>
+    <p>세계관은 정의하기 쉽지 않은 말입니다. 교재는 딜타이의 정의를 빌려 세계관을 '인간이 생생하게 겪은 체험과 감정에서 시작되어, 역사 속에서 만들어진 세계 전체에 대한 이상과 규범'이라고 설명합니다(14쪽).</p>
+    <p>이 페이지는 1장을 따라가며 그 개념을 정리하고, 기독교인으로서 내 세계관을 점검해 보는 기록입니다. 파란색 카드는 교재 요약, 주황색 카드는 기독교 관점의 응답입니다.</p>
+    <div class="by">컴퓨터공학부 20223300 강준묵 · 기독교세계관 중간 대체과제</div>
+  </div>
+</section>
+
+<!-- 01 -->
+<section id="s1">
+  <div class="sec-head"><b>$</b> cat 01_분별.md</div>
+  <h2>1. 세계관을 분별하라</h2>
+  <div class="pair">
+    <div class="card sum">
+      <span class="tag">교재 요약</span>
+      <h3>세계관은 다양하다 <small>14–15쪽</small></h3>
+      <p>세계관은 종교와 신화 속에서 먼저 싹텄습니다. 기독교, 이슬람교, 힌두교, 불교, 유교, 도교, 샤머니즘이 각자 독특한 세계관을 가지고 있습니다. 18세기 이후 서양 사회에서는 계몽주의, 보수주의, 자유주의, 사회주의, 민족주의, 전체주의 같은 근대 이념이 큰 힘을 가졌고, 요즘은 판타지 문학, 영화, 드라마, 게임을 하나로 엮은 가상 세계관까지 등장했습니다. 또 개인주의, 소비주의, 상대주의, 과학주의, 뉴에이지, 포스트모더니즘처럼 우리가 알아채지 못하는 사이에 받아들인 '은밀한 세계관'도 있습니다.</p>
+      <p>교재는 마블 시네마틱 유니버스(MCU)를 예로 듭니다. MCU는 여러 우주가 동시에 존재하는 멀티버스이고, 각 우주의 사건은 그 우주의 세계관 안에서 일어납니다. 타노스가 우주 생명체의 절반을 없앤 것도 그 나름의 정당성이 있다는 신념에서 나온 행동입니다.</p>
+
+      <div class="sub">
+      <h3>종교와 이념 속에 뿌리내린 근본 신념 <small>16–18쪽</small></h3>
+      <p>세계관은 사람의 생각과 행동을 결정하는 근본적인 신념(basic belief)입니다. 그래서 새로운 제도나 기술을 받아들여도 쉽게 사라지지 않습니다. 인도 사람이 첨단 IT 산업에서 일해도 여전히 힌두교 세계관을 가지고 살고, 한국 사람이 근대화된 사회에 살아도 샤머니즘이나 유교적 권위주의를 품고 있는 것이 그 예입니다. 무신론적 휴머니즘 같은 근대 이념도 순수한 이성의 결론이라기보다 '어떤 사회가 바람직한가'에 대한 근본 믿음에서 나왔다고 볼 수 있습니다.</p>
+      <p>'세계관'은 독일어 'Weltanschauung'에서 왔고 영어로는 'world view'로 옮겨졌습니다. 원래 독일어는 눈으로 보는 시각보다 직관적이고 체험적인 의미가 강합니다. 딜타이는 모든 세계관의 뿌리가 '삶'이라고 했습니다. 본능과 감정이 환경과 만나 반복되며 보편적인 정서가 되고, 그것이 발전해 세계의 의미에 답하는 이상과 규범, 곧 종교나 이념이 됩니다. 나라마다 세계관이 다른 것도 기후, 인종, 국가 형태, 시대 배경이 다르기 때문입니다.</p>
+      <p>결국 세계관은 우리를 이끄는 <b>인생의 안내판</b>입니다. 문제는 그 안내판이 얼마나 잘 작동하느냐입니다.</p>
+      </div>
+    </div>
+
+    <div class="card resp">
+      <span class="tag">기독교 OS 응답</span>
+      <blockquote class="verse">주의 말씀은 내 발에 등이요 내 길에 빛이니이다<cite>시편 119:105</cite></blockquote>
+      <p>6주차 수업에서 교수님은 현대 과학철학에서도 전제 없는 학문은 없고, 완전히 중립적인 이성도 없다고 하셨습니다. 1장을 읽으며 그 말이 다시 떠올랐습니다. 누구나 이미 어떤 OS를 깔고 세상을 봅니다. 그렇다면 중요한 것은 '중립이 되는 것'이 아니라 '어떤 안내판을 따를 것인가'입니다.</p>
+      <p>기독교인에게 그 안내판은 말씀입니다. MCU처럼 같은 사건도 어느 세계관에서 보느냐에 따라 의미가 달라진다면, 저는 이 세상을 하나님이 창조하시고 지금도 다스리시는 세계로 보는 시선을 기본 설정으로 삼고 싶습니다. 동시에 은밀한 세계관 목록을 보며, 제 OS 위에서도 개인주의나 소비주의 같은 프로그램이 몰래 돌아가고 있을 수 있다는 점을 인정하게 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2">
+  <div class="sec-head"><b>$</b> tail -f 02_갈등.log</div>
+  <h2>2. 세계관은 어떤 갈등을 일으키는가?</h2>
+
+  <h3 style="margin-bottom:16px">2-1. 한 세계관 안에서도 갈등이 있다</h3>
+  <div class="pair">
+    <div class="card sum">
+      <span class="tag">교재 요약 · 19–21쪽</span>
+      <p>우리는 어떤 세계관의 영향 아래 살지만, 그 세계관대로 일관되게 살지는 못합니다. 교재는 기독교인을 예로 듭니다. 하나님이 세상을 다스리고 언젠가 심판하신다고 믿어야 하지만, 악한 사람이 잘사는 모습을 보며 창조는 믿되 지금 다스리신다는 것은 믿지 못하는 신자도 있습니다. 이웃을 사랑하라고 배워도 손해를 볼 때는 내 이익을 먼저 챙깁니다. 조선의 유학자들도 군자를 자처했지만 당파 싸움과 세도 정치로 유교 정치를 무너뜨렸고, 한국의 민족주의도 외국인 200만 명 시대와 다문화 사회 앞에서 갈등을 겪고 있습니다.</p>
+      <p>교재는 그 이유를 두 가지로 봅니다. 첫째, 우리 안의 본능적인 욕망이 세계관과 부딪히기 때문입니다. 둘째, 우리를 둘러싼 환경이 세계관과 충돌하기 때문입니다. 세계관은 이상적인 모델을 보여 주지만, 통제할 수 없는 욕망과 환경이 그 세계관을 비틀거나 힘없게 만듭니다.</p>
+    </div>
+    <div class="card resp">
+      <span class="tag">기독교 OS 응답</span>
+      <p>이 갈등을 가장 잘 보여 주는 인물은 베드로입니다.</p>
+      <blockquote class="verse">베드로가 대답하여 이르되 모두 주를 버릴지라도 나는 결코 버리지 않겠나이다<cite>마태복음 26:33</cite></blockquote>
+      <p>그렇게 말했던 베드로는 그날 밤 불가에서 예수님을 세 번이나 모른다고 했습니다(마태복음 26장). 예수님을 따르는 세계관을 가지고 있었지만, 두려움이라는 욕망과 사람들의 시선이라는 환경 앞에서 그 세계관대로 움직이지 못한 것입니다. 교재가 말한 두 가지 원인이 그대로 드러납니다.</p>
+      <p>그런데 이야기는 거기서 끝나지 않습니다. 부활하신 예수님은 바닷가에서 베드로에게 "네가 나를 사랑하느냐"고 세 번 물으시며 그를 다시 세우셨습니다(요한복음 21장). 기독교 세계관에서 갈등의 해결은 내가 더 열심히 버티는 것이 아니라, 하나님이 먼저 찾아와 회복시키시는 데서 시작됩니다.</p>
+    </div>
+  </div>
+
+  <div class="widget" id="tm">
+    <div class="w-head"><span>작업 관리자 — worldview.os</span><button class="btn go" id="updBtn">업데이트 실행</button></div>
+    <table class="proc">
+      <thead><tr><th>프로세스</th><th class="state">상태</th><th>점유율</th><th></th></tr></thead>
+      <tbody id="procBody"></tbody>
+    </table>
+    <div class="w-foot" id="tmFoot">프로세스를 누르면 설명이 나옵니다.</div>
+  </div>
+
+  <div class="card resp" style="margin-top:18px">
+    <span class="tag">기독교 OS 응답 · 업데이트</span>
+    <blockquote class="verse">너희는 이 세대를 본받지 말고 오직 마음을 새롭게 함으로 변화를 받아 하나님의 선하시고 기뻐하시고 온전하신 뜻이 무엇인지 분별하도록 하라<cite>로마서 12:2</cite></blockquote>
+    <p>로마서 12장 2절에도 '분별'이라는 말이 나옵니다. 1장의 첫 제목이 '세계관을 분별하라'인 것과 겹칩니다. 세계관은 한 번 설치하고 끝나는 것이 아니라, 말씀으로 계속 새로워져야 하는 OS라고 생각합니다.</p>
+  </div>
+
+  <h3 style="margin:48px 0 16px">2-2. 서로 다른 세계관이 만날 때</h3>
+  <div class="card sum">
+    <span class="tag">교재 요약 · 21–24쪽</span>
+    <p>일상에서 겪는 갈등은 서로 다른 세계관이 만날 때 자주 일어납니다. 교재는 네 가지로 나눕니다.</p>
+
+    <details class="err" open><summary>ERROR 01<span>종교적 세계관 vs 종교적 세계관</span></summary><div class="body">
+      <p>신라가 불교를 받아들일 때 기존 신앙과 부딪혀 이차돈이 순교했습니다. 1947년 인도가 독립할 때는 힌두교와 이슬람교의 갈등으로 인도와 파키스탄이 나뉘었고, 카슈미르에서는 지금도 충돌이 계속됩니다. 국제 정치에서 말하는 '문명의 충돌'도 십자군 전쟁부터 IS까지 이어진 기독교와 이슬람의 대립에서 시작되었습니다.</p>
+    </div></details>
+    <details class="err"><summary>ERROR 02<span>종교적 세계관 vs 과학적 세계관</span></summary><div class="body">
+      <p>전통 사회가 현대 사회로 바뀌며 생기는 갈등입니다. 불교의 열반과 윤회, 기독교의 부활과 성령 강림 같은 초자연적 믿음은 과학적 세계관으로는 증명하기 어렵습니다. 그래서 초자연주의와 자연주의의 갈등이 생기고, 과학 교육과 미디어의 영향을 많이 받는 청년들에게 특히 큰 문제가 됩니다.</p>
+    </div></details>
+    <details class="err"><summary>ERROR 03<span>정치적 세계관 vs 정치적 세계관</span></summary><div class="body">
+      <p>자유주의는 개인의 정치적·경제적 자유를, 사회주의는 평등과 경제적 정의를 더 중요하게 여깁니다. 한국은 분단과 한국전쟁을 겪었기 때문에 이 갈등이 특히 거칩니다. 보수와 진보는 서로를 원색적인 말로 부르며 대화가 거의 불가능해 보입니다. 하지만 민주 사회에서 두 진영은 공존할 수밖에 없습니다.</p>
+    </div></details>
+    <details class="err"><summary>ERROR 04<span>종교적 세계관 vs 세속적 세계관의 윤리</span></summary><div class="body">
+      <p>가장 예민한 갈등입니다. 자본주의는 개인의 경제 활동과 그 결과의 소유권을 강조하기 때문에, 불교의 자비나 기독교의 정의와 사랑의 윤리가 들어갈 자리가 좁습니다. 공리주의나 롤즈의 '공정으로서의 정의'도 현실에서 잘 지켜지지 않아 많은 나라가 복지 제도를 받아들였지만, 종교적 세계관은 여기에 만족하지 못합니다. 또 포스트모더니즘은 근대의 가치관을 권력의 산물로 보고 해체하려 하는데, 동성애 논쟁이 그 대표적인 예입니다.</p>
+    </div></details>
+
+    <p style="margin-top:16px">교재는 이런 갈등이 우리에게 한쪽 편을 강요하기도 하지만, 세계관을 일방적으로 강요하는 것은 바람직하지 않다고 말합니다. 세계관은 태어난 환경에서 만들어지지만, 성인이 되어서는 스스로 건전한 세계관을 선택해야 합니다.</p>
+  </div>
+
+  <div class="card resp" style="margin-top:18px">
+    <span class="tag">기독교 OS 응답</span>
+    <blockquote class="verse">너희 마음에 그리스도를 주로 삼아 거룩하게 하고 너희 속에 있는 소망에 관한 이유를 묻는 자에게는 대답할 것을 항상 준비하되 온유와 두려움으로 하고<cite>베드로전서 3:15</cite></blockquote>
+    <p>기독교인도 이 네 가지 갈등 한가운데 있습니다. 그런데 기독교 세계관이 요구하는 것은 상대를 이기는 것이 아니라, 내가 믿는 이유를 설명할 준비를 하되 온유하게 하는 것입니다. 부록에서도 다른 사람의 세계관을 아는 것은 이웃을 더 잘 이해하고 섬기는 데 도움이 된다고 말합니다(252쪽).</p>
+    <p>ERROR 02에 대해서는 6주차 수업이 생각납니다. 교수님은 천동설과 지동설의 충돌을 종교와 과학의 싸움이 아니라 '오염된 기독교 세계관'과 '회복된 기독교 세계관'의 충돌로 보셨습니다. 갈릴레오와 뉴턴은 하나님을 우주의 법칙을 만드신 설계자로 믿었습니다. 그렇다면 과학과 신앙은 처음부터 서로 다른 OS가 아니라, 같은 OS 안에서 함께 돌아갈 수 있는 프로그램입니다.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="s3">
+  <div class="sec-head"><b>$</b> ./03_test.sh</div>
+  <h2>3. 어떤 세계관이 바람직한가?</h2>
+  <div class="card sum">
+    <span class="tag">교재 요약 · 24–27쪽</span>
+    <p>세계관은 삶에 큰 영향을 주기 때문에 그 건전성을 따져 봐야 합니다. 그런데 많은 사람이 검토 없이 자기 세계관만 절대 진리라고 믿습니다. 교회 간판을 걸고 교주를 우상화하는 사이비 집단이나 다른 종교인을 잔혹하게 죽이는 IS를 보면, 더 건전한 세계관과 덜 건전한 세계관을 구별할 수 있다는 것을 알 수 있습니다.</p>
+    <p>모든 세계관에는 장단점이 있습니다. 유교는 인의의 윤리, 학문과 선비 정신, 충효와 지조·절개의 정신문화를 남겼지만, 가부장적 권위주의, 성별과 신분에 따른 차별, 허례허식 같은 단점도 있고, 오늘날 혈연·지연·학연으로 사회의 공정성을 약하게 만들기도 합니다. 그래서 어떤 세계관은 모든 면에서 좋고 다른 세계관은 모든 면에서 나쁘다는 생각은 사실이 아닐 뿐 아니라 위험합니다.</p>
+    <p>교재는 바람직한 세계관의 기준을 다섯 가지로 제시합니다.</p>
+    <ol class="criteria">
+      <li>인간의 정서적 필요를 인정하고 개인의 인격적 체험을 존중해야 한다.</li>
+      <li>인간과 세계에 대해 확고하고 변함없는 삶의 조망을 주어야 한다.</li>
+      <li>인권과 평화, 정의와 사랑 같은 윤리적 기준을 제시해야 한다.</li>
+      <li>개인과 사회가 당면한 현실 문제를 해결하는 데 도움을 주어야 한다.</li>
+      <li>인류의 미래에 대한 희망과 영원한 가치에 대한 가능성을 열어 주어야 한다.</li>
+    </ol>
+    <p>교재는 기독교 세계관이 이 기준에 맞는지를 이후의 장들에서 살펴본다고 합니다.</p>
+  </div>
+
+  <div class="widget runner">
+    <div class="w-head"><span>$ run_tests --target=christian_worldview</span><button class="btn go" id="runBtn">테스트 실행</button></div>
+    <div class="out" id="testOut">
+      <div class="note" id="testHint">테스트 실행을 누르면 결과가 나옵니다.</div>
+      <div class="t">
+        <div class="line"><span>[예시] confucian_worldview</span><span class="res warn">PASS 3 / FAIL 2</span></div>
+        <div class="detail">
+          <p><span class="pass">PASS</span> 윤리적 기준(인의) · 학문과 선비 정신 · 충효와 지조<br><span class="fail">FAIL</span> 차별 없는 인권 · 공정성</p>
+          <p class="note">교재가 든 유교의 장단점을 테스트 형식으로 옮긴 것입니다. 모든 면에서 완벽한 세계관은 없습니다.</p>
+        </div>
+      </div>
+      <div class="t">
+        <div class="line"><span>TEST 1 정서적 필요와 인격적 체험</span><span class="res pass">PASS</span></div>
+        <div class="detail">
+          <blockquote class="verse">수고하고 무거운 짐 진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라<cite>마태복음 11:28</cite></blockquote>
+          <p>기독교는 하나님을 개념이 아니라 인격적으로 만나는 분으로 고백합니다. 베드로를 이름으로 다시 부르신 것처럼, 하나님은 한 사람의 감정과 상처를 직접 다루십니다.</p>
+        </div>
+      </div>
+      <div class="t">
+        <div class="line"><span>TEST 2 확고하고 변함없는 조망</span><span class="res pass">PASS</span></div>
+        <div class="detail">
+          <blockquote class="verse">예수 그리스도는 어제나 오늘이나 영원토록 동일하시니라<cite>히브리서 13:8</cite></blockquote>
+          <p>창조, 타락, 구속, 회복이라는 큰 흐름이 세상과 인간을 설명하는 일관된 틀을 줍니다.</p>
+        </div>
+      </div>
+      <div class="t">
+        <div class="line"><span>TEST 3 인권, 평화, 정의, 사랑</span><span class="res pass">PASS</span></div>
+        <div class="detail">
+          <blockquote class="verse">하나님이 자기 형상 곧 하나님의 형상대로 사람을 창조하시되 남자와 여자를 창조하시고<cite>창세기 1:27</cite></blockquote>
+          <p>모든 사람이 하나님의 형상이라는 고백은 차별 없는 인권의 근거가 됩니다. 정의와 사랑은 기독교 윤리의 중심입니다.</p>
+        </div>
+      </div>
+      <div class="t">
+        <div class="line"><span>TEST 4 현실 문제 해결</span><span class="res pass">PASS</span></div>
+        <div class="detail">
+          <blockquote class="verse">여호와 하나님이 그 사람을 이끌어 에덴 동산에 두어 그것을 경작하며 지키게 하시고<cite>창세기 2:15</cite></blockquote>
+          <p>8주차에 배운 것처럼, 자연을 내 것이 아니라 하나님께 맡겨진 것으로 보는 태도는 환경 위기 같은 현실 문제에 답을 줍니다.</p>
+        </div>
+      </div>
+      <div class="t">
+        <div class="line"><span>TEST 5 미래의 희망과 영원한 가치</span><span class="res pass">PASS</span></div>
+        <div class="detail">
+          <blockquote class="verse">모든 눈물을 그 눈에서 닦아 주시니 다시는 사망이 없고 애통하는 것이나 곡하는 것이나 아픈 것이 다시 있지 아니하리니 처음 것들이 다 지나갔음이러라<cite>요한계시록 21:4</cite></blockquote>
+          <p>기독교는 역사의 끝에 하나님 나라의 완성이 있다고 믿기에, 미래에 대한 희망을 줍니다.</p>
+        </div>
+      </div>
+      <div class="t">
+        <div class="line"><span>WARNING 오염된 기독교 세계관</span><span class="res fail">FAIL</span></div>
+        <div class="detail">
+          <blockquote class="verse">사람의 계명으로 교훈을 삼아 가르치니 나를 헛되이 경배하는도다 하였느니라 하시고<cite>마태복음 15:9</cite></blockquote>
+          <p>교재가 든 사이비 집단의 예처럼, '기독교'라는 이름을 달고 있어도 말씀에서 벗어나면 이 테스트를 통과하지 못합니다. 6주차에 배운 '오염된 기독교 세계관'도 같은 경우입니다. 테스트가 통과한 것은 기독교 세계관 자체이지, 그것을 사는 제가 이미 완벽하다는 뜻은 아닙니다. 그래서 2-1의 업데이트가 계속 필요합니다.</p>
+        </div>
+      </div>
+      <div class="summary-line" id="testSum"><span class="pass">5 passed</span>, <span class="warn">1 warning</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4">
+  <div class="sec-head"><b>$</b> node 04_diagnose.js</div>
+  <h2>4. 당신의 세계관은 무엇입니까?</h2>
+  <div class="card sum">
+    <span class="tag">교재 요약 · 부록 252–261쪽</span>
+    <p>오늘날 세상에는 수많은 세계관이 있지만, 일정한 유형으로 나누면 그 수가 많지 않습니다. 자기 세계관이 무엇이고 다른 세계관과 어떻게 다른지, 왜 그것이 더 이치에 맞는지 알아야 합니다. 다른 사람의 세계관을 아는 것도 중요합니다. 부록에는 FEVA의 블레어 목사가 만든 순서도가 실려 있는데, 질문을 따라가면 14가지 세계관 가운데 하나에 도착합니다. 각 세계관은 하나님, 세상, 사람의 관계로 그려집니다.</p>
+    <p class="note">아래 진단기는 부록 순서도를 그대로 결정 트리로 옮긴 것입니다. 결과 그림은 하나님·세상·사람의 관계를 따로 그렸습니다.</p>
+  </div>
+
+  <div class="widget diag">
+    <div class="w-head"><span>diagnose(you)</span><button class="btn" id="resetBtn">처음부터</button></div>
+    <div class="diag-grid">
+      <div class="qpanel">
+        <div class="qlabel" id="qlabel">Q1</div>
+        <div class="q" id="qtext"></div>
+        <div class="opts" id="opts"></div>
+      </div>
+      <div class="stack" id="stack"></div>
+    </div>
+    <div class="result" id="result"></div>
+    <div class="graph-wrap"><svg id="graph"></svg></div>
+  </div>
+
+  <details class="all-types">
+    <summary>14가지 세계관 전체 보기</summary>
+    <div class="tlist" id="tlist"></div>
+  </details>
+</section>
+
+<!-- 05 -->
+<section id="s5">
+  <div class="sec-head"><b>$</b> cat 05_shutdown.log</div>
+  <h2>마무리</h2>
+  <div class="log"><span class="ok">[log]</span> 세계관 = OS. 누구에게나 이미 설치되어 있음.
+<span class="ok">[log]</span> 같은 OS 안에서도 충돌 발생 (욕망, 환경) → 말씀으로 업데이트 필요.
+<span class="ok">[log]</span> 다른 OS와의 충돌 → 이기는 것이 아니라 이해하고 섬기기.
+<span class="ok">[log]</span> 기독교 세계관 테스트: 5 passed, 1 warning (오염 주의).</div>
+
+  <div class="final">
+    <blockquote class="verse">만물이 그에게서 창조되되 하늘과 땅에서 보이는 것들과 보이지 않는 것들과 혹은 왕권들이나 주권들이나 통치자들이나 권세들이나 만물이 다 그로 말미암고 그를 위하여 창조되었고 / 또한 그가 만물보다 먼저 계시고 만물이 그 안에 함께 섰느니라<cite>골로새서 1:16–17</cite></blockquote>
+    <p>1장은 세계관이 무엇이고 왜 갈등을 일으키며 어떤 세계관이 바람직한지를 다룹니다. 기독교인으로서 이 장을 읽고 정리한 결론은, 세계관은 한 번 고르고 끝나는 것이 아니라 계속 점검하고 새로워져야 한다는 것입니다.</p>
+    <p>컴퓨터공학도 결국 정해진 규칙과 질서를 다루는 학문입니다. 만물이 그분 안에 함께 서 있다면, 그 질서를 탐구하는 공부도 신앙과 떨어진 것이 아니라 같은 OS 위에서 돌아가는 일이라고 생각합니다.</p>
+    <div class="log" style="margin-top:22px">&gt; shutdown complete.</div>
+  </div>
+
+  <div class="src">
+    <b>출처</b>
+    <ul>
+      <li>장종현 외, 『기독교 창으로 본 세상』, 1장 「세계관이란 무엇인가?」(최태연), 부록 「세계관의 다양한 유형들」(김진하)</li>
+      <li>성경 인용: 개역개정</li>
+    </ul>
+    <span class="mono">컴퓨터공학부 20223300 강준묵 · 기독교세계관 (윤석주 교수님)</span>
+  </div>
+</section>
+
+</main>
+<footer>worldview.os · 2026</footer>
+
+<script>
+// ---------- 00 boot ----------
+const bootLines = [
+  ['dm','$ ./boot worldview'],
+  ['','loading kernel ............ '],
+  ['ok','[ OK ] OS: Christian'],
+  ['','모든 판단은 이 OS 위에서 실행됩니다.'],
+  ['',''],
+  ['am','그런데, 나는 정말 이 OS대로 돌아가고 있을까?'],
+];
+const bootOut = document.getElementById('bootOut');
+const intro = document.getElementById('intro');
+let bootDone = false, bootTimer = null;
+
+function renderBoot(full){
+  bootOut.innerHTML = '';
+  bootLines.forEach(([c,t]) => {
+    const d = document.createElement('div'); d.className = 'l ' + c; d.textContent = t || ' ';
+    bootOut.appendChild(d);
+  });
+  const cur = document.createElement('span'); cur.className = 'cursor';
+  bootOut.lastChild.appendChild(cur);
+  intro.classList.add('show'); bootDone = true;
+}
+function typeBoot(){
+  let li = 0, ci = 0, el = null;
+  const cur = document.createElement('span'); cur.className = 'cursor';
+  function step(){
+    if (bootDone) return;
+    if (li >= bootLines.length){ renderBoot(); return; }
+    const [c,t] = bootLines[li];
+    if (!el){ el = document.createElement('div'); el.className = 'l ' + c; bootOut.appendChild(el); }
+    if (ci < t.length){
+      el.textContent = t.slice(0, ++ci); el.appendChild(cur);
+      bootTimer = setTimeout(step, t.startsWith('loading') ? 18 : 42);
+    } else {
+      if (!t) el.innerHTML = '&nbsp;';
+      li++; ci = 0; el = null;
+      bootTimer = setTimeout(step, 380);
+    }
+  }
+  step();
+}
+document.getElementById('skip').onclick = () => { clearTimeout(bootTimer); renderBoot(); };
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) renderBoot(); else typeBoot();
+
+// ---------- nav highlight ----------
+const tabs = [...document.querySelectorAll('nav a')];
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (e.isIntersecting){
+      tabs.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, {rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section').forEach(s => io.observe(s));
+
+// ---------- 02 task manager ----------
+const procs = [
+  {n:'word_of_god.exe', fg:true, cpu:34, after:56, d:'말씀을 기준으로 판단하는 메인 프로세스. 시편 119:105의 "내 발에 등".'},
+  {n:'love_neighbor.exe', fg:true, cpu:18, after:30, d:'이웃을 사랑하라는 계명. 손해를 볼 때 가장 먼저 멈추는 프로세스.'},
+  {n:'self_interest.exe', fg:false, cpu:22, after:6, d:'교재가 말한 첫 번째 원인, 본능적인 욕망. 베드로에게는 두려움이었다.'},
+  {n:'comparison.exe', fg:false, cpu:14, after:4, d:'두 번째 원인, 환경. 주변의 시선과 분위기가 판단을 바꾼다.'},
+  {n:'consumerism.exe', fg:false, cpu:12, after:4, d:'은밀한 세계관. 깔았다는 기억도 없는데 늘 백그라운드에서 돌고 있다.'},
+];
+const pb = document.getElementById('procBody');
+function drawProcs(key){
+  pb.innerHTML = '';
+  procs.forEach((p,i) => {
+    const v = p[key];
+    const tr = document.createElement('tr'); tr.className = 'row ' + (p.fg ? 'fg' : 'bg');
+    tr.innerHTML = `<td class="name">${p.n}</td><td class="state">${p.fg ? '실행 중' : '백그라운드'}</td>
+      <td style="width:45%"><div class="bar"><i style="width:${v}%"></i></div></td><td class="pct">${v}%</td>`;
+    const dr = document.createElement('tr'); dr.className = 'desc'; dr.hidden = true;
+    dr.innerHTML = `<td colspan="4">${p.d}</td>`;
+    tr.onclick = () => dr.hidden = !dr.hidden;
+    pb.append(tr, dr);
+  });
+}
+drawProcs('cpu');
+const updBtn = document.getElementById('updBtn'), tmFoot = document.getElementById('tmFoot');
+let updated = false;
+updBtn.onclick = () => {
+  if (updated){
+    drawProcs('cpu'); updated = false;
+    tmFoot.textContent = '시간이 지나면 백그라운드 프로세스는 다시 올라옵니다.';
+    updBtn.textContent = '업데이트 실행';
+    return;
+  }
+  updBtn.disabled = true;
+  tmFoot.textContent = '$ renew --mind  (로마서 12:2) ...';
+  const rows = pb.querySelectorAll('tr.row');
+  setTimeout(() => rows.forEach((r,i) => {
+    r.querySelector('.bar i').style.width = procs[i].after + '%';
+    r.querySelector('.pct').textContent = procs[i].after + '%';
+  }), 400);
+  setTimeout(() => {
+    tmFoot.innerHTML = '<span class="ok">업데이트 완료.</span> 단, 백그라운드 프로세스는 0%가 되지 않습니다. 업데이트는 계속 필요합니다.';
+    updated = true; updBtn.disabled = false; updBtn.textContent = '되돌리기';
+  }, 1800);
+};
+
+// ---------- 03 tests ----------
+const runBtn = document.getElementById('runBtn');
+runBtn.onclick = () => {
+  runBtn.disabled = true;
+  const ts = [...document.querySelectorAll('#testOut .t')];
+  ts.forEach(t => t.classList.remove('show'));
+  document.getElementById('testHint').hidden = true;
+  document.getElementById('testSum').classList.remove('show');
+  ts.forEach((t,i) => setTimeout(() => t.classList.add('show'), 500 * i + 200));
+  setTimeout(() => {
+    document.getElementById('testSum').classList.add('show');
+    runBtn.disabled = false; runBtn.textContent = '다시 실행';
+  }, 500 * ts.length + 300);
+};
+
+// ---------- 04 diagnose ----------
+// 부록 순서도(252–253쪽)를 그대로 옮김
+const Y='그렇다', N='아니다', U='알 수 없다', X='관심없다';
+const nodes = {
+  q1:{q:'신은 존재하는가?', s:'신 존재?', o:[[Y,'q2'],[N,'atheist'],[U,'agnostic'],[X,'apathe']]},
+  q2:{q:'신은 둘 이상 존재하는가?', s:'둘 이상?', o:[[Y,'poly'],[N,'q3']]},
+  q3:{q:'이 순간 세상을 움직이는 건 바로 신이다.', s:'지금 세상을 움직임', o:[[Y,'q4'],[N,'deism']]},
+  q4:{q:'신은 이곳이 아닌 별도의 세상에 거주한다.', s:'별도의 세상', o:[[Y,'q5'],[N,'q6']]},
+  q5:{q:'신이 이 세상에 관여하고 있다.', s:'세상에 관여', o:[[Y,'theism'],[N,'deism']]},
+  q6:{q:'신은 만물에 깃들어 있다.', s:'만물에 깃듦', o:[[Y,'panth'],[N,'q7']]},
+  q7:{q:'세상은 신의 일부이다.', s:'세상=신의 일부', o:[[Y,'panen'],[N,'e1']]},
+  q8:{q:'신은 개인적으로 알 수 있다.', s:'개인적으로 앎', o:[[Y,'q9'],[N,'agnostic']]},
+  q9:{q:'신은 예수 그리스도 안에서, 즉 아들을 통하여 자신을 알려주셨다.', s:'아들을 통해 계시', o:[[Y,'q10'],[N,'e2']]},
+  q10:{q:'예수의 죽음과 부활을 믿는 것에서만 구원을 찾을 수 있다.', s:'죽음과 부활', o:[[Y,'christian'],[N,'e3']]},
+  q11:{q:'진정한 의미는 이 세상 속에서 찾을 수 있는가?', s:'의미: 이 세상?', o:[[Y,'q12'],[N,'nihil'],[U,'agnostic'],[X,'apathe']]},
+  q12:{q:'진정한 의미는 경험 속에서 찾을 수 있는가?', s:'의미: 경험?', o:[[Y,'exist'],[N,'q13']]},
+  q13:{q:'진정한 의미는 인간 속에서 찾을 수 있는가?', s:'의미: 인간?', o:[[Y,'human'],[N,'q14']]},
+  q14:{q:'진정한 의미는 자연 속에서 찾을 수 있는가?', s:'의미: 자연?', o:[[Y,'nat'],[N,'q15']]},
+  q15:{q:'진정한 의미란 각 개인마다 다르게 발견된다.', s:'의미: 개인마다', o:[[Y,'rel'],[N,'e4']]},
+  e1:{end:'그렇다면 신과 세상은 어떤 관계인가요?', s:'신과 세상의 관계는?'},
+  e2:{end:'당신은 어떻게 신을 알고 있습니까?', s:'어떻게 신을 아는가?'},
+  e3:{end:'당신은 어떻게 구원받을 생각입니까?', s:'어떻게 구원받는가?'},
+  e4:{end:'당신은 어디서 의미를 발견합니까?', s:'어디서 의미를?'},
+};
+// 유형 노드: next가 있으면 거기서 질문이 이어짐
+const types = {
+  christian:{k:'기독교 유신론', en:'Christian Theism', s:'기독교 유신론',
+    d:'하나님은 세상을 초월하시면서 세상 안에서 일하시는 인격적인 분입니다. 세상을 창조하고 유지하며 다스리시고, 아들 예수 그리스도를 통해 자신을 알리셨습니다. 예수의 죽음과 부활을 통해 구원이 주어진다고 믿습니다.',
+    nb:'이 결과는 정답이 아니라 출발점입니다. 2-1의 업데이트를 계속해야 하는 OS입니다.'},
+  theism:{k:'유신론(일신론)', en:'Theism', s:'유신론', next:'q8',
+    d:'하나의 신이 존재한다는 관점입니다. 넓게 보면 신은 완전히 초월적이고 인간과 관계를 맺지 않지만, 자기 뜻을 알리고 마지막에 인간을 심판한다고 믿습니다. 이슬람교의 관점이기도 합니다.',
+    nb:'한 분 하나님을 믿는다는 공통점에서 대화를 시작할 수 있습니다.'},
+  poly:{k:'다신론', en:'Polytheism', s:'다신론',
+    d:'많은 신이 있다는 관점으로, 고대 이집트·그리스·로마에서 널리 퍼졌습니다. 신들은 각자 자연 현상을 맡고 있고, 예측하기 어렵습니다. 오늘날에도 힌두교 등에서 볼 수 있습니다.',
+    nb:'자연과 삶에 의미를 찾으려는 마음을 먼저 존중하고 싶습니다.'},
+  deism:{k:'이신론', en:'Deism', s:'이신론',
+    d:'17–18세기 과학혁명 중에 생겼습니다. 성경의 계시가 아니라 오직 인간의 이성으로만 하나님을 알 수 있다고 봅니다. 하나님은 시계공처럼 우주를 만들었지만, 그 뒤로는 세상에 관여하지도 다스리지도 않는다고 믿습니다.',
+    nb:'창조주를 인정하는 데까지는 함께할 수 있습니다. 지금도 일하시는 하나님을 이야기하고 싶습니다.'},
+  panth:{k:'범신론', en:'Pantheism', s:'범신론',
+    d:'"만물이 신이다"라는 뜻으로 18세기에 만들어진 말이며, 동양 종교에 흔합니다. 신은 초월적이지 않고 세상 모든 것 안에 있는 비인격적인 힘이며, 인간은 참된 자유를 갖지 못한다고 봅니다.',
+    nb:'자연을 소중히 여기는 태도는 자연을 맡겨진 것으로 보는 기독교의 시선과도 통합니다.'},
+  panen:{k:'만유내재신론', en:'Panentheism', s:'만유내재신론',
+    d:'"신이 만물에 내재한다"는 관점으로, 19–20세기 서양에서 나타났습니다. 범신론과 유신론을 합친 관점으로, 세상은 신의 일부이고 세상에서 일어나는 일이 신에게도 영향을 준다고 봅니다.',
+    nb:'세상과 신의 관계를 진지하게 고민한 관점으로 이해하고 대화하고 싶습니다.'},
+  agnostic:{k:'불가지론', en:'Agnosticism', s:'불가지론', next:'q11',
+    d:'19세기 헉슬리가 처음 쓴 말로, 신이 있는지 없는지 알 수 없다는 관점입니다. 유신론과 무신론 사이에 있습니다.',
+    nb:'\'모른다\'는 정직함을 존중하며, 내가 믿는 이유를 온유하게 설명할 수 있어야 합니다(벧전 3:15).'},
+  apathe:{k:'무관심주의', en:'Apatheism', s:'무관심주의', next:'q11',
+    d:'무관심(apathy)과 유신론(theism)을 합친 말로, 최근에 등장했습니다. 신이 인간을 돌본다는 증거가 없다고 보기 때문에 신이 있든 없든 상관하지 않습니다. 실용주의적 무신론으로도 불립니다.',
+    nb:'말보다 삶으로 보여 주는 것이 먼저라고 생각합니다.'},
+  atheist:{k:'무신론', en:'Atheism', s:'무신론', next:'q11',
+    d:'\'신이 없다\'는 뜻의 그리스어에서 나온 말입니다. 신이 없으니 삶의 의미는 자연, 경험, 인간 이성 등 이 세상 안에서 찾아야 한다고 봅니다.',
+    nb:'6주차에 배운 것처럼 무신론도 하나의 신념입니다. 서로의 전제를 인정하는 데서 대화가 시작됩니다.'},
+  nihil:{k:'허무주의', en:'Nihilism', s:'허무주의',
+    d:'라틴어 \'무(nihil)\'에서 나온 말로, 19세기 러시아에서 퍼졌습니다. 신, 진리, 도덕, 가치를 모두 부정하고 삶에 의미가 없다고 봅니다.',
+    nb:'의미를 잃은 사람에게 가장 필요한 것은 논쟁보다 곁에 있어 주는 것입니다.'},
+  exist:{k:'실존주의', en:'Existentialism', s:'실존주의',
+    d:'무신론적 실존주의는 세상이 부조리하고 하나님이 없으므로, 인간이 스스로 선택하며 자기 삶의 의미를 만들어야 한다고 봅니다.',
+    nb:'진지하게 의미를 찾는 그 질문을 함께 나눌 수 있습니다.'},
+  human:{k:'인본주의', en:'Humanism', s:'인본주의',
+    d:'"인간은 만물의 척도"라는 프로타고라스의 말로 요약됩니다. 인간의 이성과 가치를 가장 높게 봅니다. 오늘날에는 하나님을 부정하는 세속적 인본주의가 많습니다.',
+    nb:'인간의 존엄을 귀하게 여기는 점은 같습니다. 그 존엄의 근거가 하나님의 형상이라고 말하고 싶습니다.'},
+  nat:{k:'자연주의', en:'Naturalism', s:'자연주의',
+    d:'신은 없고 자연만이 실재라는 관점입니다. 우주는 원인과 결과로 닫힌 체계이고, 인간도 복잡한 기계와 같다고 봅니다.',
+    nb:'자연의 질서를 탐구하는 일은 함께할 수 있습니다. 그 질서를 누가 만들었는지에서 생각이 갈립니다.'},
+  rel:{k:'상대주의', en:'Relativism', s:'상대주의',
+    d:'20세기 포스트모더니즘의 영향으로 퍼진 관점입니다. 어떤 믿음으로 남을 휘두르는 것을 막기 위해 모든 진리가 상대적이라고 말합니다. 모든 종교가 진리라고 보는 종교다원주의로도 알려져 있습니다.',
+    nb:'다양성을 존중하는 태도는 배우되, 그 안에서도 진리를 찾는 질문을 놓지 않고 싶습니다.'},
+};
+Object.entries(types).forEach(([id,t]) => nodes[id] = Object.assign({type:true}, t));
+
+// 하나님(G)·세상(W)·사람(P) 관계 그림 — 직접 그린 단순 도식
+function sketch(id){
+  const W = '<circle cx="100" cy="128" r="44" fill="#2a2018" stroke="#6b4a2c"/>';
+  const P = (x,y,c='#d6d9de') => `<circle cx="${x}" cy="${y-9}" r="4" fill="${c}"/><rect x="${x-4}" y="${y-4}" width="8" height="13" rx="3" fill="${c}"/>`;
+  const G = (x,y,o=1) => `<circle cx="${x}" cy="${y}" r="15" fill="none" stroke="#d9a066" stroke-width="2" opacity="${o}"/><text x="${x}" y="${y+4}" text-anchor="middle" style="fill:#d9a066">G</text>`;
+  const ln = (x1,y1,x2,y2,dash) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#d9a066" stroke-width="1.5" ${dash?'stroke-dasharray="4 4"':''}/>`;
+  const lbl = t => `<text x="100" y="192" text-anchor="middle">${t}</text>`;
+  const s = {
+    christian: G(100,30)+ln(100,45,100,84)+ln(92,44,84,100)+W+P(100,124)+lbl('초월 + 내재 · 인격적 관계'),
+    theism: G(100,30)+ln(100,45,100,84,true)+W+P(100,124)+lbl('초월적 · 관계는 멀다'),
+    poly: W+G(76,112,.8)+G(124,112,.8)+G(100,146,.8)+P(100,124)+lbl('세상 안의 여러 신'),
+    deism: G(100,30)+`<text x="100" y="70" text-anchor="middle">만든 뒤 떠남</text>`+W+P(100,124)+lbl('창조 후 관여하지 않음'),
+    panth: '<circle cx="100" cy="128" r="44" fill="#2a2018" stroke="#d9a066" stroke-width="2"/>'+P(100,124)+lbl('세상 = 신'),
+    panen: '<circle cx="100" cy="112" r="68" fill="none" stroke="#d9a066" stroke-width="2"/>'+'<circle cx="100" cy="122" r="34" fill="#2a2018" stroke="#6b4a2c"/>'+P(100,120)+lbl('세상은 신의 일부'),
+    agnostic: `<text x="100" y="40" text-anchor="middle" style="font-size:26px;fill:#d9a066">?</text>`+W+P(100,124)+lbl('알 수 없음'),
+    apathe: G(100,30,.35)+ln(78,52,122,8)+W+P(100,124)+lbl('있든 없든 상관없음'),
+    atheist: W+P(100,124)+lbl('신이 없음'),
+    nihil: '<circle cx="100" cy="128" r="44" fill="none" stroke="#3a3f47" stroke-dasharray="4 4"/>'+lbl('의미 없음'),
+    exist: W+P(100,124,'#d9a066')+`<text x="100" y="62" text-anchor="middle">스스로 선택</text>`+lbl('개인이 의미를 만듦'),
+    human: W+P(82,124)+P(100,124)+P(118,124)+lbl('인간이 기준'),
+    nat: '<circle cx="100" cy="128" r="44" fill="#2a2018" stroke="#8fd18b"/>'+P(100,124)+lbl('자연만이 실재'),
+    rel: W+P(78,124)+P(122,124)+'<circle cx="78" cy="120" r="14" fill="none" stroke="#7fb4e6"/><circle cx="122" cy="120" r="14" fill="none" stroke="#e5736b"/>'+lbl('각자의 진리'),
+  };
+  return `<svg class="sketch" viewBox="0 0 200 204" width="200" height="204">${s[id]||''}</svg>`;
+}
+
+// 진행 상태
+let path = [], taken = [];   // 방문 노드, 지나간 간선
+const qtext = document.getElementById('qtext'), opts = document.getElementById('opts'),
+      qlabel = document.getElementById('qlabel'), stack = document.getElementById('stack'),
+      result = document.getElementById('result');
+
+function lastType(){ for (let i = path.length - 1; i >= 0; i--) if (nodes[path[i]].type) return path[i]; return null; }
+
+function go(id, from, ans){
+  if (from) taken.push(from + '>' + id);
+  const loop = path.includes(id);
+  path.push(id);
+  if (from) logFrame(from, ans, id);
+  const n = nodes[id];
+  if (n.type && n.next && !loop) return go(n.next, id, '→');
+  if (n.type || n.end) return finish(loop);
+  ask(id);
+}
+function ask(id){
+  const n = nodes[id];
+  qlabel.textContent = 'Q' + (path.filter(p => nodes[p].q).length);
+  qtext.textContent = n.q;
+  opts.innerHTML = '';
+  n.o.forEach(([a,to]) => {
+    const b = document.createElement('button'); b.className = 'btn'; b.textContent = a;
+    b.onclick = () => go(to, id, a);
+    opts.appendChild(b);
+  });
+  result.classList.remove('show');
+  drawGraph();
+}
+function logFrame(from, ans, to){
+  const f = nodes[from], t = nodes[to];
+  const d = document.createElement('div'); d.className = 'fr';
+  if (f.type) d.innerHTML = `  <span class="ty">${f.s}</span> 판정 후 계속 →`;
+  else d.innerHTML = `<span class="k">${f.s}</span> → <span class="ans">${ans}</span>` + (t.type ? ` → <span class="ty">${t.k}</span>` : '');
+  stack.appendChild(d); stack.scrollTop = stack.scrollHeight;
+}
+function finish(loop){
+  const last = path[path.length - 1];
+  const tid = lastType();
+  opts.innerHTML = '';
+  qlabel.textContent = 'RESULT';
+  const end = nodes[last].end;
+  qtext.textContent = tid ? '→ ' + types[tid].k : end;
+  if (loop){
+    const d = document.createElement('div'); d.className = 'fr';
+    d.innerHTML = '<span class="ty">이미 지나온 유형으로 돌아옴 — 여기서 판정 종료</span>';
+    stack.appendChild(d);
+  }
+  if (tid){
+    const t = types[tid];
+    result.innerHTML = `${sketch(tid)}<div><div class="rname">${t.k}</div><div class="ren">${t.en}</div><p>${t.d}</p>
+      ${end ? `<div class="openq">순서도는 여기서 질문으로 끝납니다: <b>${end}</b></div>` : ''}
+      <div class="neighbor"><b>// 이 세계관을 가진 이웃을 이해하기</b>${t.nb}</div></div>`;
+  } else {
+    result.innerHTML = `<div></div><div><p>순서도는 이 질문으로 끝납니다. 14가지 유형 중 어디에도 딱 맞지 않는 경우입니다.</p><div class="openq"><b>${end}</b></div></div>`;
+  }
+  result.classList.add('show');
+  drawGraph();
+}
+function reset(){
+  path = []; taken = []; stack.innerHTML = '<div class="fr">$ diagnose(you)</div>';
+  go('q1');
+}
+document.getElementById('resetBtn').onclick = reset;
+
+// 결정 트리 그림: 위쪽은 신이 있다고 답한 갈래, 아래쪽은 아닌 갈래 [열, 행]
+const grid = {
+  q1:[0,5], q2:[1,2], poly:[2,1], q3:[2,3], deism:[3,1], q4:[3,3], q5:[4,2], q6:[4,4],
+  theism:[5,2], panth:[5,3], q7:[5,4], q8:[6,2], panen:[6,3], e1:[6,4],
+  q9:[7,1], q10:[8,0], e2:[8,2], christian:[9,0], e3:[9,1],
+  atheist:[1,6], agnostic:[1,7], apathe:[1,8], q11:[2,7], q12:[3,7], nihil:[3,8],
+  exist:[4,6], q13:[4,7], human:[5,6], q14:[5,7], nat:[6,6], q15:[6,7], rel:[7,6], e4:[7,7],
+};
+const CW = 126, RH = 44, NW = 110, NH = 30, PAD = 12;
+const GW = PAD * 2 + 9 * CW + NW, GH = PAD * 2 + 8 * RH + NH;
+const pos = {};
+Object.entries(grid).forEach(([id,[c,r]]) => pos[id] = {x: PAD + c * CW, y: PAD + r * RH});
+function drawGraph(){
+  let edges = '', boxes = '';
+  Object.entries(nodes).forEach(([id, n]) => {
+    const outs = n.o ? n.o.map(o => o[1]) : (n.next ? [n.next] : []);
+    outs.forEach(to => {
+      const a = pos[id], b = pos[to];
+      const back = b.x <= a.x;
+      const on = taken.includes(id + '>' + to);
+      const y1 = a.y + NH/2, y2 = b.y + NH/2;
+      const d = back
+        ? `M${a.x},${y1} C${a.x - 40},${y1} ${b.x + NW + 40},${y2} ${b.x + NW},${y2}`
+        : `M${a.x + NW},${y1} C${a.x + NW + 10},${y1} ${b.x - 10},${y2} ${b.x},${y2}`;
+      edges += `<path class="gedge${back ? ' back' : ''}${on ? ' on' : ''}" d="${d}"/>`;
+    });
+    const p = pos[id], cls = n.type ? 'type' : (n.end ? 'end' : '');
+    const on = path.includes(id) ? ' on' : '';
+    boxes += `<g class="gnode ${cls}${on}"><rect x="${p.x}" y="${p.y}" width="${NW}" height="${NH}" rx="5"/>
+      <text x="${p.x + NW/2}" y="${p.y + NH/2 + 4}" text-anchor="middle">${n.s}</text></g>`;
+  });
+  const svg = document.getElementById('graph');
+  svg.setAttribute('viewBox', `0 0 ${GW} ${GH}`);
+  svg.setAttribute('width', GW); svg.setAttribute('height', GH);
+  svg.innerHTML = edges + boxes;
+}
+reset();
+
+// 전체 목록
+document.getElementById('tlist').innerHTML = Object.values(types).map(t =>
+  `<div class="tcard"><h4>${t.k}<span>${t.en}</span></h4><div>${t.d}</div><div class="nb">${t.nb}</div></div>`).join('');
+</script>
+</body>
+</html>
